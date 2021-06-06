@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ETCH-A-SKETCH</title>
+  <link rel="stylesheet" href="ETCH_A_SKETCH_style.css">
+</head>
+<body>
+   <div class="parameters">
+    <input type="range" min="2" max="55" value="5" class="slider" id="myRange"> 
+    <p>Value: <span id="demo"></span></p>
+</div><br>
+<div class="outer">
+<div id="container"></div>
+</div>
+
+<div id='output'></div>
+   
+
+<script>
+const container=document.querySelector('#container');
+const outer=document.getElementsByClassName('outer');
+
+const gridComputedStyle = window.getComputedStyle(container)
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value 
+
+function grid(grid_size){
+    
+    let grid_width=600/grid_size;
+    document.getElementById("container").style.gridTemplateColumns=`repeat(${grid_size}, ${grid_width}px)`;
+    let number_box=grid_size*grid_size;
+    while (container.firstChild) {
+    container.removeChild(container.firstChild);}
+    var i=0;
+    for(i=0;i<number_box;i++){
+    const box=document.createElement('div');
+    box.classList.add('box');
+    //box.textContent=`${i+1}`;
+    container.appendChild(box);}
+    
+
+}
+
+slider.oninput = function() {
+  output.innerHTML = this.value + " x "+ this.value;
+  
+  grid(parseInt(this.value,10))
+ 
+ 
+}
+
+
+
+</script>
+
+</body>
