@@ -6,14 +6,13 @@
   <link rel="stylesheet" href="ETCH_A_SKETCH_style.css">
 </head>
 <body>
-   <div class="parameters">
-    <input type="range" min="2" max="55" value="5" class="slider" id="myRange"> 
-    <p>Value: <span id="demo"></span></p>
-</div><br>
-<div class="outer">
-<div id="container"></div>
-</div>
+    <h1 class="title">ETCH_A_SKETCH</h1>
+    <input type="range" min="0" max="55" value="0" class="slider" id="myRange"> 
+    <p class="value">Grid Size: <span id="demo"></span></p>
 
+
+<button class="clear" onclick="clear_color()" >Clear</button>
+<div id="container"></div>
 <div id='output'></div>
    
 
@@ -26,9 +25,12 @@ var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
 output.innerHTML = slider.value 
 
+
+
+
 function grid(grid_size){
     
-    let grid_width=600/grid_size;
+    let grid_width=550/grid_size;
     document.getElementById("container").style.gridTemplateColumns=`repeat(${grid_size}, ${grid_width}px)`;
     let number_box=grid_size*grid_size;
     while (container.firstChild) {
@@ -40,7 +42,13 @@ function grid(grid_size){
     //box.textContent=`${i+1}`;
     container.appendChild(box);}
     
-
+    var color=document.getElementsByClassName('box');
+    for (i=0;i<color.length;i++){
+    color[i].addEventListener("mouseover",function(e){
+        this.setAttribute("style", "background-color:#ccccff;")
+    },false);
+    
+    }
 }
 
 slider.oninput = function() {
@@ -48,7 +56,13 @@ slider.oninput = function() {
   
   grid(parseInt(this.value,10))
  
- 
+}
+
+function clear_color(){
+    var color=document.getElementsByClassName('box');
+    for(i=0;i<color.length;i++){
+    color[i].style.removeProperty('background-color');
+}
 }
 
 
